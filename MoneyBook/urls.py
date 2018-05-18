@@ -4,6 +4,5 @@ from django.contrib import admin
 
 
  urlpatterns = [
- url(r'^kakao/', include('kakao.urls')),
- url(r'^admin/', admin.site.urls),
-]
+     url(r'^kakao/', include('kakao.urls')),
+     url(r'^admin/', admin.site.urls),]
