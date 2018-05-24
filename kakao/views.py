@@ -46,6 +46,7 @@ def answer(request):
             #db.child("users").push(data)
             #with key
             db.child("users").child("오늘쓴돈얍").set(data)
+        insert_data()
 
         return JsonResponse({
                 'message': {
