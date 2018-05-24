@@ -23,22 +23,7 @@ password="kkcc1313"
 
 user = auth.sign_in_with_email_and_password(email, password)
 
-data = {
-    "name": "Mortimer 'Morty' Smith",
-    "email": "1234@gmail.com",
-    "operation":"",
-    "when_month":"",
-    "when_day":"",
-    "when_hour":"",
-    "when_start":"",
-    "when_end":"",
-    "who_op":"",
-    "who_with":"",
-    "where":"",
-    "what_op":"",
-    "what_what":""
-}
-
+data={}
 
 
 def keyboard(request):
@@ -60,7 +45,7 @@ def answer(request):
         def insert_data():
     #db.child("users").push(data)
     #with key
-            db.child("users").child("Morty").set(data)
+        db.child("users").child("Morty").set(data)
 
 
         def update(string_key, string_data):
@@ -74,3 +59,30 @@ def answer(request):
             print(datatmp.val())
 
         insert_data()
+
+
+
+    return JsonResponse({
+                'message': {
+                    'text': today
+                },
+                'keyboard': {
+                    'type':'buttons',
+                    'buttons':['오늘 쓴 돈','남은돈']
+                }
+
+            })
+
+    elif datacontent == '남은돈':
+        remain = "12345678원 남았습니다."
+
+        return JsonResponse({
+                'message': {
+                    'text': remain
+                },
+                'keyboard': {
+                    'type':'buttons',
+                    'buttons':['오늘 쓴 돈','남은돈']
+                }
+
+            })
