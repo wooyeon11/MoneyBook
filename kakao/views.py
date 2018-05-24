@@ -43,11 +43,9 @@ def answer(request):
     if datacontent == '오늘 쓴 돈':
         today = "10000원입니다"
         def insert_data():
+            db.child("users").child("Morty").set(data)
     #db.child("users").push(data)
     #with key
-        db.child("users").child("Morty").set(data)
-
-
         def update(string_key, string_data):
             db.child("users").child(string_key).update(string_data)
 
@@ -62,7 +60,7 @@ def answer(request):
 
 
 
-    return JsonResponse({
+        return JsonResponse({
                 'message': {
                     'text': today
                 },
