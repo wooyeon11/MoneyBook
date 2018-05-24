@@ -23,7 +23,22 @@ password="kkcc1313"
 
 user = auth.sign_in_with_email_and_password(email, password)
 
-data={}
+data = {
+    "name": "Mortimer 'Morty' Smith",
+    "email": "1234@gmail.com",
+    "operation":"",
+    "when_month":"",
+    "when_day":"",
+    "when_hour":"",
+    "when_start":"",
+    "when_end":"",
+    "who_op":"",
+    "who_with":"",
+    "where":"",
+    "what_op":"",
+    "what_what":""
+}
+
 
 
 def keyboard(request):
