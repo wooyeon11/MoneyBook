@@ -23,7 +23,7 @@ password="kkcc1313"
 
 user = auth.sign_in_with_email_and_password(email, password)
 
-
+data={}
 
 
 def keyboard(request):
@@ -47,6 +47,7 @@ def answer(request):
             #with key
             db.child("users").child("오늘쓴돈얍").set(data)
         insert_data()
+
 
         return JsonResponse({
                 'message': {
