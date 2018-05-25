@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import json
 import pyrebase
 
+#데이터베이스 설정
 config = {
     'apiKey': "AIzaSyAsAGGqVZ1bVlFh-Eu3o0yULHysGiJQ0Qk",
     'authDomain': "test-39511.firebaseapp.com",
@@ -29,13 +30,13 @@ data = {
 }
 
 
+#챗봇 구현
 
 def keyboard(request):
 
     return JsonResponse({
         'type':'buttons',
-        'buttons':['오늘 쓴 돈','남은돈']
-    })
+        'buttons':['사용법','현재 금액','+','-','정리']})
 
 @csrf_exempt
 def answer(request):
@@ -44,10 +45,10 @@ def answer(request):
     received_json_data = json.loads(json_str)
     datacontent = received_json_data['content']
 
-    if datacontent == '오늘 쓴 돈':
-        today = "10000원입니다"
+    if datacontent == '사용법':
+        today = "앱과 연동하여 쓰기 쉽도록 만들어졌습니다 어쩌고저쩌고"
         def insert_data():
-            db.child("users").child("지출").set(data)
+            db.child("users").child("지출").set(data) # users>지출>data입력
     #db.child("users").push(data)
     #with key
         def update(string_key, string_data):
@@ -70,12 +71,12 @@ def answer(request):
                 },
                 'keyboard': {
                     'type':'buttons',
-                    'buttons':['오늘 쓴 돈','남은돈']
+                    'buttons':['사용법','현재 금액','+','-','정리']
                 }
 
             })
 
-    elif datacontent == '남은돈':
+    elif datacontent == '현재 금액':
         remain = "12345678원 남았습니다."
 
         return JsonResponse({
@@ -84,7 +85,46 @@ def answer(request):
                 },
                 'keyboard': {
                     'type':'buttons',
-                    'buttons':['오늘 쓴 돈','남은돈']
+                    'buttons':['사용법','현재 금액','+','-','정리']
+                }
+
+            })
+    elif datacontent == '+':
+        remain = "입금금액을 입력해주세요"
+
+        return JsonResponse({
+                'message': {
+                    'text': remain
+                },
+                'keyboard': {
+                    'type':'buttons',
+                    'buttons':['사용법','현재 금액','+','-','정리']
+                }
+
+            })
+    elif datacontent == '-':
+        remain = "지출금액을 입력해주세요"
+
+        return JsonResponse({
+                'message': {
+                    'text': remain
+                },
+                'keyboard': {
+                    'type':'buttons',
+                    'buttons':['사용법','현재 금액','+','-','정리']
+                }
+
+            })
+    elif datacontent == '정리':
+        remain = "12345678원 남았습니다."
+
+        return JsonResponse({
+                'message': {
+                    'text': remain
+                },
+                'keyboard': {
+                    'type':'buttons',
+                    'buttons':['사용법','현재 금액','+','-','정리']
                 }
 
             })
