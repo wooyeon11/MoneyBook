@@ -1,3 +1,4 @@
+#git 오류나면 git stash save ""
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -39,14 +40,16 @@ def keyboard(request):
         'buttons':['사용법','현재 금액','+','-','정리']})
 
 @csrf_exempt
-def answer(request):
+def answer(request): #메세지함수
 
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     datacontent = received_json_data['content']
 
     if datacontent == '사용법':
-        today = "앱과 연동하여 쓰기 쉽도록 만들어졌습니다 어쩌고저쩌고"
+        explain = "앱과 연동하여 쓰기 쉽도록 만들어졌습니다 어쩌고저쩌고"
+
+
         def insert_data():
             db.child("users").child("지출").set(data) # users>지출>data입력
     #db.child("users").push(data)
@@ -67,7 +70,7 @@ def answer(request):
 
         return JsonResponse({
                 'message': {
-                    'text': today
+                    'text': explain  #사용법설명
                 },
                 'keyboard': {
                     'type':'buttons',
@@ -90,25 +93,31 @@ def answer(request):
 
             })
     elif datacontent == '+':
-        remain = "입금금액을 입력해주세요"
+        entermoney = "입금금액을 입력해주세요"
 
         return JsonResponse({
                 'message': {
-                    'text': remain
-                },
+                    'text': entermoney
+                    },
+                'keyboard' : {
+                'type' : 'text' #텍스트로 입력받기 위하여 키보드 타입을 text로 설계
+                 },
                 'keyboard': {
                     'type':'buttons',
                     'buttons':['사용법','현재 금액','+','-','정리']
-                }
+                    }
 
             })
     elif datacontent == '-':
-        remain = "지출금액을 입력해주세요"
+        spendmoney = "지출금액을 입력해주세요"
 
         return JsonResponse({
                 'message': {
-                    'text': remain
+                    'text': spendmoney
                 },
+                'keyboard' : {
+                'type' : 'text' #텍스트로 입력받기 위하여 키보드 타입을 text로 설계
+                 },
                 'keyboard': {
                     'type':'buttons',
                     'buttons':['사용법','현재 금액','+','-','정리']
