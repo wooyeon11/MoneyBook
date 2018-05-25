@@ -97,17 +97,12 @@ def answer(request): #메세지함수
 
         return JsonResponse({
                 'message': {
-                    'text': entermoney
+                    'text': entermoney + datacontent
                     },
                 'keyboard' : {
                 'type' : 'text' #텍스트로 입력받기 위하여 키보드 타입을 text로 설계
                  },
-                'keyboard': {
-                    'type':'buttons',
-                    'buttons':['사용법','현재 금액','+','-','정리']
-                    }
-
-            })
+                 })
     elif datacontent == '-':
         spendmoney = "지출금액을 입력해주세요"
 
